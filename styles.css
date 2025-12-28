@@ -690,29 +690,30 @@ select {
 .about-images {
     position: relative;
     display: grid;
-    grid-template-columns: 1fr 0.7fr;
+    grid-template-columns: 1fr 1fr;
     gap: var(--space-4);
+    align-items: stretch;
 }
 
 .about-img-wrapper {
     position: relative;
     border-radius: var(--radius-lg);
     overflow: hidden;
-}
-
-.about-img-wrapper.main {
-    grid-row: span 2;
-}
-
-.about-img-wrapper.secondary {
-    margin-top: var(--space-12);
+    min-height: 450px;
 }
 
 .about-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     transition: transform var(--transition-slow);
+}
+
+@media (min-width: 968px) {
+    .about-img-wrapper {
+        min-height: 550px;
+    }
 }
 
 .about-img-wrapper:hover .about-img {
@@ -727,14 +728,16 @@ select {
 
 .experience-badge {
     position: absolute;
-    bottom: var(--space-8);
-    right: var(--space-4);
+    bottom: var(--space-6);
+    left: 50%;
+    transform: translateX(-50%);
     background: var(--gradient-gold);
     color: var(--color-bg-dark);
     padding: var(--space-4) var(--space-6);
     border-radius: var(--radius-lg);
     text-align: center;
     box-shadow: var(--shadow-xl);
+    z-index: 10;
 }
 
 .exp-number {
@@ -1660,6 +1663,29 @@ select {
 
     .menu-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* Fix formulario de reservación en móvil */
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+    }
+
+    /* About images apiladas en móvil */
+    .about-images {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+    }
+
+    .about-img-wrapper {
+        min-height: 300px;
+    }
+
+    .experience-badge {
+        bottom: auto;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 }
 

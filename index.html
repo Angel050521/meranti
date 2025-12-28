@@ -4,23 +4,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meranti Restaurante | Cocina de Autor & Mixología</title>
+    <title>Meranti Restaurante Apatzingán | Cortes Premium & Mixología</title>
 
     <!-- SEO Meta Tags -->
     <meta name="description"
-        content="Meranti Restaurante - Experiencia gastronómica única con cortes premium, cocina de autor y mixología de élite. Reserva tu mesa y vive una experiencia inolvidable.">
-    <meta name="keywords" content="restaurante, cortes premium, mixología, cocina de autor, grill, carnes, cócteles">
+        content="Meranti Restaurante en Apatzingán, Michoacán - El espacio ideal para crear momentos especiales. Especialistas en cortes premium, cocina de autor y mixología de élite. ¡Reserva tu mesa!">
+    <meta name="keywords"
+        content="restaurante Apatzingán, cortes premium Michoacán, mixología, cocina de autor, grill, carnes, cócteles, restaurante Apatzingán Michoacán, Meranti">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://merantirestaurante.com/">
 
     <!-- Open Graph -->
     <meta property="og:locale" content="es_MX">
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="restaurant">
     <meta property="og:title" content="Meranti Restaurante | Cocina de Autor & Mixología">
     <meta property="og:description"
-        content="Experiencia gastronómica única con cortes premium, cocina de autor y mixología de élite.">
+        content="Experiencia gastronómica única con cortes premium, cocina de autor y mixología de élite. Reserva tu mesa ahora.">
     <meta property="og:url" content="https://merantirestaurante.com/">
     <meta property="og:site_name" content="Meranti Restaurante">
+    <meta property="og:image" content="https://merantirestaurante.com/images/galeria/restaurante.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Meranti Restaurante Apatzingán - Cortes Premium y Mixología">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Meranti Restaurante | Cocina de Autor & Mixología">
+    <meta name="twitter:description"
+        content="Experiencia gastronómica única con cortes premium, cocina de autor y mixología de élite. Reserva tu mesa ahora.">
+    <meta name="twitter:image" content="https://merantirestaurante.com/images/galeria/restaurante.jpg">
+    <meta name="twitter:image:alt" content="Meranti Restaurante Apatzingán - Cortes Premium y Mixología">
+
+    <!-- Schema.org Structured Data - Restaurant -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "Meranti Restaurante",
+        "description": "Meranti tiene como compromiso brindarte más que un restaurante, un espacio ideal para crear momentos especiales. Con el sabor y la magia de nuestra comida seremos el anfitrión perfecto para tus días especiales. Nuestra especialidad: los cortes premium.",
+        "image": "https://merantirestaurante.com/images/galeria/restaurante.jpg",
+        "url": "https://merantirestaurante.com",
+        "telephone": "+52-1-453-158-2078",
+        "email": "contacto@merantirestaurante.com",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Av. Corregidora esquina con José Sotero de Castañeda",
+            "addressLocality": "Apatzingán de la Constitución",
+            "addressRegion": "Michoacán",
+            "postalCode": "60600",
+            "addressCountry": "MX"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 19.079762982125626,
+            "longitude": -102.35660942397388
+        },
+        "servesCuisine": ["Cocina de Autor", "Cortes Premium", "Mixología", "Cocina Mexicana Contemporánea"],
+        "priceRange": "$$-$$$",
+        "currenciesAccepted": "MXN",
+        "paymentAccepted": "Efectivo, Tarjeta de crédito, Tarjeta de débito",
+        "openingHoursSpecification": [
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+                "opens": "13:00",
+                "closes": "23:00"
+            },
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Friday", "Saturday"],
+                "opens": "13:00",
+                "closes": "00:00"
+            },
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": "Sunday",
+                "opens": "13:00",
+                "closes": "22:00"
+            }
+        ],
+        "menu": "https://merantirestaurante.com/#menu",
+        "acceptsReservations": "True",
+        "hasMenu": {
+            "@type": "Menu",
+            "name": "Menú Principal",
+            "hasMenuSection": [
+                {
+                    "@type": "MenuSection",
+                    "name": "Entradas",
+                    "description": "Deliciosas entradas para comenzar"
+                },
+                {
+                    "@type": "MenuSection",
+                    "name": "Cortes Premium",
+                    "description": "Los mejores cortes de carne certificada"
+                },
+                {
+                    "@type": "MenuSection",
+                    "name": "Mixología",
+                    "description": "Cócteles de autor creados por expertos"
+                }
+            ]
+        },
+        "sameAs": [
+            "https://www.facebook.com/RestMerantiMX",
+            "https://www.instagram.com/meranti_restaurante/",
+            "https://www.threads.com/@meranti_restaurante"
+        ]
+    }
+    </script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -160,13 +252,13 @@
             <div class="about-grid">
                 <div class="about-images">
                     <div class="about-img-wrapper main">
-                        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&h=800&fit=crop"
-                            alt="Cortes premium Meranti" class="about-img">
+                        <img src="images/about-img-wrapper main.jpg"
+                            alt="Cortes premium en Meranti Restaurante Apatzingán" class="about-img" loading="lazy">
                         <div class="about-img-overlay"></div>
                     </div>
                     <div class="about-img-wrapper secondary">
-                        <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=400&h=500&fit=crop"
-                            alt="Mixología Meranti" class="about-img">
+                        <img src="images/about-img-wrapper secondary.jpg" alt="Mixología y cócteles de autor en Meranti"
+                            class="about-img" loading="lazy">
                         <div class="about-img-overlay"></div>
                     </div>
                     <div class="experience-badge">
@@ -1466,50 +1558,55 @@
 
             <div class="gallery-grid">
                 <div class="gallery-item large">
-                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=600&fit=crop"
-                        alt="Ambiente Meranti">
+                    <img src="images/galeria/restaurante.jpg"
+                        alt="Meranti Restaurante Apatzingán - Interior del restaurante" loading="lazy">
+                    <div class="gallery-overlay">
+                        <span class="gallery-caption">Nuestro Restaurante</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/galeria/galeria1.jpg" alt="Platillos gourmet en Meranti Restaurante"
+                        loading="lazy">
+                    <div class="gallery-overlay">
+                        <span class="gallery-caption">Momentos inolvidables</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/galeria/galeria2.jpg" alt="Cortes premium y especialidades Meranti" loading="lazy">
+                    <div class="gallery-overlay">
+                        <span class="gallery-caption">Propuestas únicas</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item tall">
+                    <img src="images/galeria/galeria3.jpg" alt="Ambiente y decoración Meranti Apatzingán"
+                        loading="lazy">
                     <div class="gallery-overlay">
                         <span class="gallery-caption">Ambiente Único</span>
                     </div>
                 </div>
 
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=400&fit=crop"
-                        alt="Cortes Premium">
+                    <img src="images/galeria/galeria4.jpg" alt="Experiencia gastronómica Meranti" loading="lazy">
                     <div class="gallery-overlay">
-                        <span class="gallery-caption">Cortes Premium</span>
+                        <span class="gallery-caption">Experiencia Única</span>
                     </div>
                 </div>
 
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=400&h=400&fit=crop"
-                        alt="Mixología">
+                    <img src="images/galeria/galeria5.jpg" alt="Mixología y cócteles de autor Meranti" loading="lazy">
                     <div class="gallery-overlay">
-                        <span class="gallery-caption">Mixología</span>
-                    </div>
-                </div>
-
-                <div class="gallery-item tall">
-                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=600&fit=crop"
-                        alt="Interior Restaurante">
-                    <div class="gallery-overlay">
-                        <span class="gallery-caption">Diseño Interior</span>
+                        <span class="gallery-caption">Reuniones y eventos</span>
                     </div>
                 </div>
 
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400&h=400&fit=crop"
-                        alt="Servicio">
+                    <img src="images/galeria/galeria6.jpg" alt="Momentos especiales en Meranti Restaurante"
+                        loading="lazy">
                     <div class="gallery-overlay">
-                        <span class="gallery-caption">Servicio de Excelencia</span>
-                    </div>
-                </div>
-
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=400&h=400&fit=crop"
-                        alt="Plato Gourmet">
-                    <div class="gallery-overlay">
-                        <span class="gallery-caption">Presentación Gourmet</span>
+                        <span class="gallery-caption">Momentos Especiales</span>
                     </div>
                 </div>
             </div>
@@ -1588,7 +1685,7 @@
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required placeholder="tu@email.com">
+                            <input type="email" id="email" name="email" placeholder="tu@email.com (opcional)">
                         </div>
                     </div>
 
@@ -1641,11 +1738,11 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-lg btn-block">
-                        <span>Confirmar Reservación</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        <span>Reservar por WhatsApp</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                            fill="currentColor">
+                            <path
+                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                         </svg>
                     </button>
                 </form>

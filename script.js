@@ -166,10 +166,11 @@ function initMenuTabs() {
 }
 
 /* ===============================================
-   RESERVATION FORM
+   RESERVATION FORM - WhatsApp Integration
    =============================================== */
 function initReservationForm() {
     const form = document.getElementById('reservation-form');
+    const WHATSAPP_NUMBER = '5214531582078';
 
     if (form) {
         // Set minimum date to today
@@ -185,9 +186,57 @@ function initReservationForm() {
             const submitBtn = form.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
 
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                guests: document.getElementById('guests').value,
+                date: document.getElementById('date').value,
+                time: document.getElementById('time').value,
+                message: document.getElementById('message').value
+            };
+
+            // Format date for display
+            const dateObj = new Date(formData.date + 'T00:00:00');
+            const dateFormatted = dateObj.toLocaleDateString('es-MX', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            // Format time for display
+            const timeFormatted = new Date('1970-01-01T' + formData.time).toLocaleTimeString('es-MX', {
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            });
+
+            // Build WhatsApp message
+            let whatsappMessage = `*NUEVA RESERVACION - MERANTI RESTAURANTE*\n\n`;
+            whatsappMessage += `- *Nombre:* ${formData.name}\n`;
+            if (formData.email.trim()) {
+                whatsappMessage += `- *Email:* ${formData.email}\n`;
+            }
+            whatsappMessage += `- *Telefono:* ${formData.phone}\n`;
+            whatsappMessage += `- *Personas:* ${formData.guests}\n`;
+            whatsappMessage += `- *Fecha:* ${dateFormatted}\n`;
+            whatsappMessage += `- *Hora:* ${timeFormatted}\n`;
+
+            if (formData.message.trim()) {
+                whatsappMessage += `\n*Peticiones especiales:*\n${formData.message}\n`;
+            }
+
+            whatsappMessage += `\n_Enviado desde merantirestaurante.com_`;
+
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+
             // Show loading state
             submitBtn.innerHTML = `
-                <span>Enviando...</span>
+                <span>Abriendo WhatsApp...</span>
                 <svg class="spinning" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <line x1="12" y1="2" x2="12" y2="6"></line>
                     <line x1="12" y1="18" x2="12" y2="22"></line>
@@ -201,26 +250,29 @@ function initReservationForm() {
             `;
             submitBtn.disabled = true;
 
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            // Small delay for user feedback
+            await new Promise(resolve => setTimeout(resolve, 800));
+
+            // Open WhatsApp
+            window.open(whatsappURL, '_blank');
 
             // Show success state
             submitBtn.innerHTML = `
-                <span>¡Reservación Confirmada!</span>
+                <span>¡WhatsApp Abierto!</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                     <polyline points="22 4 12 14.01 9 11.01"></polyline>
                 </svg>
             `;
-            submitBtn.style.background = 'linear-gradient(135deg, #2D5A3D 0%, #3D7A52 100%)';
+            submitBtn.style.background = 'linear-gradient(135deg, #25D366 0%, #128C7E 100%)';
 
-            // Reset form
+            // Reset form after delay
             setTimeout(() => {
                 form.reset();
                 submitBtn.innerHTML = originalText;
                 submitBtn.style.background = '';
                 submitBtn.disabled = false;
-            }, 3000);
+            }, 4000);
         });
     }
 }

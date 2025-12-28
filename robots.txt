@@ -1,0 +1,16 @@
+# robots.txt para Meranti Restaurante
+# https://merantirestaurante.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://merantirestaurante.com/sitemap.xml
+
+# Bloquear archivos innecesarios para SEO
+Disallow: /*.css$
+Disallow: /*.js$
+
+# Permitir Google a indexar imágenes
+User-agent: Googlebot-Image
+Allow: /
