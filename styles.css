@@ -1692,10 +1692,14 @@ select {
     }
 
     .experience-badge {
+        position: absolute;
         bottom: auto;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        height: auto;
+        max-height: fit-content;
+        padding: var(--space-4) var(--space-6);
     }
 }
 
