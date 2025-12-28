@@ -11,35 +11,35 @@
     --color-primary: #DAA63F;
     --color-primary-dark: #B8872E;
     --color-primary-light: #EFC46A;
-    
+
     /* Neutral Palette - Carbón & Madera */
     --color-bg-dark: #0D0D0D;
     --color-bg: #121212;
     --color-bg-light: #1A1A1A;
     --color-bg-card: #1E1E1E;
     --color-bg-elevated: #252525;
-    
+
     /* Accent - Verde Bosque */
     --color-accent: #2D5A3D;
     --color-accent-light: #3D7A52;
-    
+
     /* Text Colors */
     --color-text: #FFFFFF;
     --color-text-secondary: #A0A0A0;
     --color-text-muted: #666666;
-    
+
     /* Copper/Bronze Accent */
     --color-copper: #B87333;
-    
+
     /* Gradients */
     --gradient-gold: linear-gradient(135deg, #DAA63F 0%, #F4D03F 50%, #DAA63F 100%);
-    --gradient-dark: linear-gradient(180deg, rgba(13,13,13,0) 0%, rgba(13,13,13,0.9) 100%);
-    --gradient-card: linear-gradient(145deg, rgba(218,166,63,0.1) 0%, rgba(218,166,63,0) 100%);
-    
+    --gradient-dark: linear-gradient(180deg, rgba(13, 13, 13, 0) 0%, rgba(13, 13, 13, 0.9) 100%);
+    --gradient-card: linear-gradient(145deg, rgba(218, 166, 63, 0.1) 0%, rgba(218, 166, 63, 0) 100%);
+
     /* Typography */
     --font-display: 'Playfair Display', Georgia, serif;
     --font-body: 'Raleway', -apple-system, BlinkMacSystemFont, sans-serif;
-    
+
     /* Font Sizes */
     --text-xs: 0.75rem;
     --text-sm: 0.875rem;
@@ -52,7 +52,7 @@
     --text-5xl: 3rem;
     --text-6xl: 3.75rem;
     --text-7xl: 4.5rem;
-    
+
     /* Spacing */
     --space-1: 0.25rem;
     --space-2: 0.5rem;
@@ -66,7 +66,7 @@
     --space-16: 4rem;
     --space-20: 5rem;
     --space-24: 6rem;
-    
+
     /* Border Radius */
     --radius-sm: 4px;
     --radius: 8px;
@@ -74,24 +74,24 @@
     --radius-xl: 16px;
     --radius-2xl: 24px;
     --radius-full: 9999px;
-    
+
     /* Shadows */
-    --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
-    --shadow: 0 4px 6px rgba(0,0,0,0.3);
-    --shadow-lg: 0 10px 25px rgba(0,0,0,0.4);
-    --shadow-xl: 0 20px 50px rgba(0,0,0,0.5);
-    --shadow-glow: 0 0 30px rgba(218,166,63,0.3);
-    
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.4);
+    --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 0 30px rgba(218, 166, 63, 0.3);
+
     /* Transitions */
     --transition-fast: 150ms ease;
     --transition: 300ms ease;
     --transition-slow: 500ms ease;
     --transition-bounce: 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    
+
     /* Container */
     --container-max: 1280px;
     --container-padding: 1.5rem;
-    
+
     /* Header */
     --header-height: 80px;
 }
@@ -99,7 +99,9 @@
 /* ===============================================
    RESET & BASE STYLES
    =============================================== */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -133,7 +135,8 @@ a {
     transition: color var(--transition);
 }
 
-ul, ol {
+ul,
+ol {
     list-style: none;
 }
 
@@ -144,7 +147,9 @@ button {
     background: none;
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
     font-family: inherit;
     font-size: inherit;
 }
@@ -220,7 +225,7 @@ input, textarea, select {
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-lg), 0 0 40px rgba(218,166,63,0.4);
+    box-shadow: var(--shadow-lg), 0 0 40px rgba(218, 166, 63, 0.4);
 }
 
 .btn-outline {
@@ -300,13 +305,25 @@ input, textarea, select {
 }
 
 @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
 }
 
 @keyframes loading {
-    0% { width: 0; }
-    100% { width: 100%; }
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 100%;
+    }
 }
 
 /* ===============================================
@@ -326,7 +343,7 @@ input, textarea, select {
 .header.scrolled {
     background: rgba(13, 13, 13, 0.95);
     backdrop-filter: blur(20px);
-    box-shadow: 0 1px 0 rgba(218,166,63,0.1);
+    box-shadow: 0 1px 0 rgba(218, 166, 63, 0.1);
 }
 
 .nav {
@@ -418,31 +435,31 @@ input, textarea, select {
         transition: right var(--transition);
         z-index: 1001;
     }
-    
+
     .nav-menu.active {
         right: 0;
     }
-    
+
     .nav-list {
         flex-direction: column;
         gap: var(--space-6);
     }
-    
+
     .nav-link {
         font-size: var(--text-lg);
     }
-    
+
     .nav-close {
         display: block;
         position: absolute;
         top: var(--space-6);
         right: var(--space-6);
     }
-    
+
     .nav-toggle {
         display: block;
     }
-    
+
     .nav-btn {
         display: none;
     }
@@ -463,8 +480,8 @@ input, textarea, select {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: 
-        linear-gradient(rgba(13,13,13,0.7), rgba(13,13,13,0.8)),
+    background:
+        linear-gradient(rgba(13, 13, 13, 0.7), rgba(13, 13, 13, 0.8)),
         url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80') center/cover no-repeat;
     overflow: hidden;
 }
@@ -493,8 +510,8 @@ input, textarea, select {
     align-items: center;
     gap: var(--space-2);
     padding: var(--space-2) var(--space-4);
-    background: rgba(218,166,63,0.1);
-    border: 1px solid rgba(218,166,63,0.3);
+    background: rgba(218, 166, 63, 0.1);
+    border: 1px solid rgba(218, 166, 63, 0.3);
     border-radius: var(--radius-full);
     font-size: var(--text-sm);
     color: var(--color-primary);
@@ -557,7 +574,7 @@ input, textarea, select {
 .stat-divider {
     width: 1px;
     height: 40px;
-    background: rgba(218,166,63,0.3);
+    background: rgba(218, 166, 63, 0.3);
 }
 
 .hero-scroll {
@@ -597,8 +614,17 @@ input, textarea, select {
 }
 
 @keyframes scrollWheel {
-    0%, 100% { opacity: 1; top: 8px; }
-    50% { opacity: 0; top: 20px; }
+
+    0%,
+    100% {
+        opacity: 1;
+        top: 8px;
+    }
+
+    50% {
+        opacity: 0;
+        top: 20px;
+    }
 }
 
 /* Animations */
@@ -612,13 +638,26 @@ input, textarea, select {
     animation: fadeInUp 1s ease forwards;
 }
 
-.delay-1 { animation-delay: 0.2s; }
-.delay-2 { animation-delay: 0.4s; }
-.delay-3 { animation-delay: 0.6s; }
+.delay-1 {
+    animation-delay: 0.2s;
+}
+
+.delay-2 {
+    animation-delay: 0.4s;
+}
+
+.delay-3 {
+    animation-delay: 0.6s;
+}
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes fadeInUp {
@@ -683,7 +722,7 @@ input, textarea, select {
 .about-img-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, transparent 50%, rgba(13,13,13,0.7) 100%);
+    background: linear-gradient(180deg, transparent 50%, rgba(13, 13, 13, 0.7) 100%);
 }
 
 .experience-badge {
@@ -741,7 +780,7 @@ input, textarea, select {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(218,166,63,0.1);
+    background: rgba(218, 166, 63, 0.1);
     border-radius: var(--radius);
     color: var(--color-primary);
 }
@@ -768,9 +807,9 @@ input, textarea, select {
 .specialties-bg {
     position: absolute;
     inset: 0;
-    background: 
-        radial-gradient(ellipse at top left, rgba(218,166,63,0.05) 0%, transparent 50%),
-        radial-gradient(ellipse at bottom right, rgba(45,90,61,0.05) 0%, transparent 50%);
+    background:
+        radial-gradient(ellipse at top left, rgba(218, 166, 63, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom right, rgba(45, 90, 61, 0.05) 0%, transparent 50%);
 }
 
 .specialties-grid {
@@ -784,7 +823,7 @@ input, textarea, select {
 .specialty-card {
     position: relative;
     background: var(--color-bg-card);
-    border: 1px solid rgba(218,166,63,0.1);
+    border: 1px solid rgba(218, 166, 63, 0.1);
     border-radius: var(--radius-xl);
     padding: var(--space-10);
     text-align: center;
@@ -792,14 +831,14 @@ input, textarea, select {
 }
 
 .specialty-card:hover {
-    border-color: rgba(218,166,63,0.3);
+    border-color: rgba(218, 166, 63, 0.3);
     transform: translateY(-8px);
     box-shadow: var(--shadow-xl);
 }
 
 .specialty-card.featured {
     background: var(--gradient-card), var(--color-bg-card);
-    border-color: rgba(218,166,63,0.3);
+    border-color: rgba(218, 166, 63, 0.3);
 }
 
 .specialty-badge {
@@ -823,7 +862,7 @@ input, textarea, select {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(218,166,63,0.1);
+    background: rgba(218, 166, 63, 0.1);
     border-radius: var(--radius-full);
     color: var(--color-primary);
 }
@@ -915,20 +954,20 @@ input, textarea, select {
 .menu-item {
     position: relative;
     background: var(--color-bg-card);
-    border: 1px solid rgba(255,255,255,0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: var(--radius-lg);
     overflow: hidden;
     transition: all var(--transition);
 }
 
 .menu-item:hover {
-    border-color: rgba(218,166,63,0.2);
+    border-color: rgba(218, 166, 63, 0.2);
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
 }
 
 .menu-item.featured {
-    border-color: rgba(218,166,63,0.3);
+    border-color: rgba(218, 166, 63, 0.3);
 }
 
 .menu-item-badge {
@@ -1051,7 +1090,7 @@ input, textarea, select {
 .gallery-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, transparent 40%, rgba(13,13,13,0.9) 100%);
+    background: linear-gradient(180deg, transparent 40%, rgba(13, 13, 13, 0.9) 100%);
     display: flex;
     align-items: flex-end;
     padding: var(--space-4);
@@ -1080,8 +1119,8 @@ input, textarea, select {
 .reservations-bg {
     position: absolute;
     inset: 0;
-    background: 
-        radial-gradient(ellipse at center, rgba(218,166,63,0.03) 0%, transparent 50%);
+    background:
+        radial-gradient(ellipse at center, rgba(218, 166, 63, 0.03) 0%, transparent 50%);
 }
 
 .reservations-content {
@@ -1123,7 +1162,7 @@ input, textarea, select {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(218,166,63,0.1);
+    background: rgba(218, 166, 63, 0.1);
     border-radius: var(--radius);
     color: var(--color-primary);
 }
@@ -1142,7 +1181,7 @@ input, textarea, select {
 
 .reservation-form {
     background: var(--color-bg-card);
-    border: 1px solid rgba(218,166,63,0.1);
+    border: 1px solid rgba(218, 166, 63, 0.1);
     border-radius: var(--radius-xl);
     padding: var(--space-8);
 }
@@ -1182,7 +1221,7 @@ input, textarea, select {
     width: 100%;
     padding: var(--space-3) var(--space-4);
     background: var(--color-bg);
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius);
     color: var(--color-text);
     transition: border-color var(--transition);
@@ -1245,8 +1284,8 @@ input, textarea, select {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(218,166,63,0.1);
-    border: 1px solid rgba(218,166,63,0.2);
+    background: rgba(218, 166, 63, 0.1);
+    border: 1px solid rgba(218, 166, 63, 0.2);
     border-radius: var(--radius);
     color: var(--color-primary);
     transition: all var(--transition);
@@ -1277,7 +1316,7 @@ input, textarea, select {
 .footer {
     background: var(--color-bg-dark);
     padding: var(--space-16) 0 var(--space-8);
-    border-top: 1px solid rgba(218,166,63,0.1);
+    border-top: 1px solid rgba(218, 166, 63, 0.1);
 }
 
 .footer-content {
@@ -1352,7 +1391,7 @@ input, textarea, select {
     flex: 1;
     padding: var(--space-3) var(--space-4);
     background: var(--color-bg);
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius);
     color: var(--color-text);
 }
@@ -1368,7 +1407,7 @@ input, textarea, select {
     align-items: center;
     gap: var(--space-4);
     padding-top: var(--space-8);
-    border-top: 1px solid rgba(255,255,255,0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
     text-align: center;
 }
 
@@ -1434,24 +1473,234 @@ input, textarea, select {
 /* ===============================================
    RESPONSIVE UTILITIES
    =============================================== */
-@media (max-width: 480px) {
-    .hero-stats {
-        flex-direction: column;
-        gap: var(--space-4);
+
+/* Tablets and small laptops */
+@media (max-width: 768px) {
+    :root {
+        --header-height: 70px;
+        --container-padding: 1rem;
     }
-    
-    .stat-divider {
-        width: 60px;
-        height: 1px;
+
+    .section {
+        padding: var(--space-16) 0;
     }
-    
+
+    .hero {
+        min-height: 100vh;
+        min-height: 100dvh;
+        /* Dynamic viewport height for mobile */
+    }
+
+    .hero-content {
+        padding: calc(var(--header-height) + var(--space-8)) var(--space-4) var(--space-12);
+    }
+
+    .hero-badge {
+        font-size: var(--text-xs);
+        padding: var(--space-2) var(--space-3);
+        margin-bottom: var(--space-4);
+    }
+
+    .hero-title {
+        font-size: clamp(var(--text-3xl), 10vw, var(--text-5xl));
+        margin-bottom: var(--space-4);
+    }
+
+    .hero-description {
+        font-size: var(--text-base);
+        margin-bottom: var(--space-6);
+        padding: 0 var(--space-2);
+    }
+
     .hero-buttons {
         flex-direction: column;
         width: 100%;
+        gap: var(--space-3);
+        margin-bottom: var(--space-8);
     }
-    
+
     .hero-buttons .btn {
         width: 100%;
+    }
+
+    .hero-stats {
+        flex-direction: column;
+        gap: var(--space-4);
+        padding: 0 var(--space-4);
+    }
+
+    .stat-divider {
+        width: 80px;
+        height: 1px;
+    }
+
+    .stat-number {
+        font-size: var(--text-3xl);
+    }
+
+    .stat-label {
+        font-size: var(--text-xs);
+    }
+
+    .hero-scroll {
+        display: none;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 150px;
+    }
+
+    .gallery-item.large {
+        grid-column: span 2;
+        grid-row: span 1;
+    }
+
+    .gallery-item.tall {
+        grid-row: span 1;
+    }
+
+    .specialties-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .specialty-card {
+        padding: var(--space-6);
+    }
+
+    .menu-tabs {
+        gap: var(--space-1);
+        overflow-x: auto;
+        padding-bottom: var(--space-2);
+        justify-content: flex-start;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .menu-tab {
+        padding: var(--space-2) var(--space-4);
+        font-size: var(--text-xs);
+        white-space: nowrap;
+    }
+
+    .menu-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    :root {
+        --container-padding: 0.75rem;
+    }
+
+    .hero-content {
+        padding-top: calc(var(--header-height) + var(--space-4));
+        padding-bottom: var(--space-8);
+    }
+
+    .hero-badge {
+        display: none;
+        /* Hide badge on very small screens */
+    }
+
+    .hero-title {
+        font-size: var(--text-3xl);
+        line-height: 1.2;
+    }
+
+    .hero-description {
+        font-size: var(--text-sm);
+        line-height: 1.7;
+    }
+
+    .hero-stats {
+        gap: var(--space-3);
+    }
+
+    .stat-number {
+        font-size: var(--text-2xl);
+    }
+
+    .stat-divider {
+        width: 60px;
+    }
+
+    .btn-lg {
+        padding: var(--space-3) var(--space-6);
+        font-size: var(--text-sm);
+    }
+
+    .about-images {
+        grid-template-columns: 1fr;
+    }
+
+    .about-img-wrapper.main {
+        grid-row: auto;
+    }
+
+    .about-img-wrapper.secondary {
+        margin-top: 0;
+    }
+
+    .experience-badge {
+        bottom: var(--space-4);
+        right: var(--space-2);
+        padding: var(--space-3) var(--space-4);
+    }
+
+    .exp-number {
+        font-size: var(--text-2xl);
+    }
+
+    .section-title {
+        font-size: var(--text-2xl);
+    }
+
+    .reservations-content {
+        gap: var(--space-8);
+    }
+
+    .reservation-form {
+        padding: var(--space-5);
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: var(--space-4);
+    }
+
+    .footer-legal {
+        flex-direction: column;
+        gap: var(--space-2);
+        text-align: center;
+    }
+}
+
+/* Extra small phones */
+@media (max-width: 360px) {
+    .hero-title {
+        font-size: var(--text-2xl);
+    }
+
+    .hero-description {
+        font-size: var(--text-xs);
+    }
+
+    .stat-number {
+        font-size: var(--text-xl);
+    }
+
+    .stat-label {
+        font-size: 0.65rem;
     }
 }
 
