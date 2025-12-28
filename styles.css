@@ -279,6 +279,16 @@ select {
     text-align: center;
 }
 
+.logo-preloader-icon {
+    height: 230px;
+    width: auto;
+    margin-bottom: var(--space-4);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    animation: pulse 2s ease-in-out infinite;
+}
+
 .logo-preloader {
     font-family: var(--font-display);
     font-size: var(--text-4xl);
@@ -286,7 +296,6 @@ select {
     color: var(--color-primary);
     letter-spacing: 0.3em;
     margin-bottom: var(--space-8);
-    animation: pulse 2s ease-in-out infinite;
 }
 
 .preloader-bar {
@@ -355,23 +364,24 @@ select {
 
 .nav-logo {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
 }
 
-.logo-text {
-    font-family: var(--font-display);
-    font-size: var(--text-xl);
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    color: var(--color-primary);
+.logo-img {
+    height: 70px;
+    width: auto;
+    transition: transform var(--transition);
 }
 
-.logo-tagline {
-    font-size: var(--text-xs);
-    letter-spacing: 0.15em;
-    color: var(--color-text-secondary);
-    text-transform: uppercase;
+.logo-img:hover {
+    transform: scale(1.05);
+}
+
+/* Preloader logo */
+.logo-preloader-img {
+    height: 120px;
+    width: auto;
+    margin-bottom: var(--space-8);
 }
 
 .nav-list {
