@@ -1807,3 +1807,123 @@ select {
     background: var(--color-primary);
     color: var(--color-bg-dark);
 }
+
+/* ===============================================
+   MAP LAZY LOAD FACADE
+   =============================================== */
+.map-placeholder {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--color-bg-card);
+}
+
+.map-facade {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.map-static-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7);
+    transition: filter var(--transition);
+}
+
+.map-facade:hover .map-static-image {
+    filter: brightness(0.5);
+}
+
+.map-facade-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    background: rgba(13, 13, 13, 0.4);
+    transition: background var(--transition);
+}
+
+.map-facade:hover .map-facade-overlay {
+    background: rgba(13, 13, 13, 0.6);
+}
+
+.map-load-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-6);
+    background: var(--gradient-gold);
+    color: var(--color-bg-dark);
+    border: none;
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+    box-shadow: var(--shadow-lg);
+}
+
+.map-load-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-xl), var(--shadow-glow);
+}
+
+.map-load-btn svg {
+    flex-shrink: 0;
+}
+
+.map-directions-link {
+    color: var(--color-text);
+    font-size: var(--text-sm);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: color var(--transition);
+}
+
+.map-directions-link:hover {
+    color: var(--color-primary);
+}
+
+.map-placeholder iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: var(--radius-lg);
+}
+
+/* Loading state for map */
+.map-placeholder.loading::after {
+    content: 'Cargando mapa...';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg-card);
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+}
+
+@media (max-width: 480px) {
+    .map-placeholder {
+        height: 300px;
+    }
+
+    .map-load-btn {
+        padding: var(--space-3) var(--space-4);
+        font-size: var(--text-sm);
+    }
+
+    .map-load-btn svg {
+        width: 24px;
+        height: 24px;
+    }
+}

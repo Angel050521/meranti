@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initReservationForm();
     initParticles();
     initScrollAnimations();
+    initMapLazyLoad();
 });
 
 /* ===============================================
@@ -19,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
    =============================================== */
 function initPreloader() {
     const preloader = document.getElementById('preloader');
-    
+
     window.addEventListener('load', () => {
         setTimeout(() => {
             preloader.classList.add('hidden');
@@ -37,7 +38,7 @@ function initNavigation() {
     const navToggle = document.getElementById('nav-toggle');
     const navClose = document.getElementById('nav-close');
     const navLinks = document.querySelectorAll('.nav-link');
-    
+
     // Header scroll effect
     function handleScroll() {
         if (window.scrollY > 100) {
@@ -46,10 +47,10 @@ function initNavigation() {
             header.classList.remove('scrolled');
         }
     }
-    
+
     window.addEventListener('scroll', handleScroll);
     handleScroll();
-    
+
     // Mobile menu toggle
     if (navToggle) {
         navToggle.addEventListener('click', () => {
@@ -57,37 +58,37 @@ function initNavigation() {
             document.body.style.overflow = 'hidden';
         });
     }
-    
+
     if (navClose) {
         navClose.addEventListener('click', () => {
             navMenu.classList.remove('active');
             document.body.style.overflow = 'visible';
         });
     }
-    
+
     // Close menu on link click
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
             navMenu.classList.remove('active');
             document.body.style.overflow = 'visible';
-            
+
             // Update active link
             navLinks.forEach(l => l.classList.remove('active'));
             link.classList.add('active');
         });
     });
-    
+
     // Update active link on scroll
     const sections = document.querySelectorAll('section[id]');
-    
+
     function updateActiveLink() {
         const scrollY = window.scrollY;
-        
+
         sections.forEach(section => {
             const sectionHeight = section.offsetHeight;
             const sectionTop = section.offsetTop - 150;
             const sectionId = section.getAttribute('id');
-            
+
             if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
                 navLinks.forEach(link => {
                     link.classList.remove('active');
@@ -98,7 +99,7 @@ function initNavigation() {
             }
         });
     }
-    
+
     window.addEventListener('scroll', throttle(updateActiveLink, 100));
 }
 
@@ -107,7 +108,7 @@ function initNavigation() {
    =============================================== */
 function initScrollEffects() {
     const backToTop = document.getElementById('backToTop');
-    
+
     // Back to top button visibility
     function handleBackToTop() {
         if (window.scrollY > 500) {
@@ -116,19 +117,19 @@ function initScrollEffects() {
             backToTop.classList.remove('visible');
         }
     }
-    
+
     window.addEventListener('scroll', throttle(handleBackToTop, 100));
-    
+
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
-            
+
             if (target) {
                 const headerHeight = 80;
                 const targetPosition = target.offsetTop - headerHeight;
-                
+
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
@@ -144,15 +145,15 @@ function initScrollEffects() {
 function initMenuTabs() {
     const tabs = document.querySelectorAll('.menu-tab');
     const panels = document.querySelectorAll('.menu-panel');
-    
+
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
             const targetTab = tab.dataset.tab;
-            
+
             // Update active tab
             tabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
-            
+
             // Update active panel
             panels.forEach(panel => {
                 panel.classList.remove('active');
@@ -169,7 +170,7 @@ function initMenuTabs() {
    =============================================== */
 function initReservationForm() {
     const form = document.getElementById('reservation-form');
-    
+
     if (form) {
         // Set minimum date to today
         const dateInput = document.getElementById('date');
@@ -177,13 +178,13 @@ function initReservationForm() {
             const today = new Date().toISOString().split('T')[0];
             dateInput.setAttribute('min', today);
         }
-        
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const submitBtn = form.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
-            
+
             // Show loading state
             submitBtn.innerHTML = `
                 <span>Enviando...</span>
@@ -199,10 +200,10 @@ function initReservationForm() {
                 </svg>
             `;
             submitBtn.disabled = true;
-            
+
             // Simulate API call
             await new Promise(resolve => setTimeout(resolve, 2000));
-            
+
             // Show success state
             submitBtn.innerHTML = `
                 <span>¡Reservación Confirmada!</span>
@@ -212,7 +213,7 @@ function initReservationForm() {
                 </svg>
             `;
             submitBtn.style.background = 'linear-gradient(135deg, #2D5A3D 0%, #3D7A52 100%)';
-            
+
             // Reset form
             setTimeout(() => {
                 form.reset();
@@ -230,9 +231,9 @@ function initReservationForm() {
 function initParticles() {
     const container = document.getElementById('particles');
     if (!container) return;
-    
+
     const particleCount = 50;
-    
+
     for (let i = 0; i < particleCount; i++) {
         createParticle(container);
     }
@@ -252,7 +253,7 @@ function createParticle(container) {
         animation: float ${Math.random() * 10 + 10}s linear infinite;
         animation-delay: ${Math.random() * 5}s;
     `;
-    
+
     container.appendChild(particle);
 }
 
@@ -288,43 +289,94 @@ styleSheet.textContent = `
 document.head.appendChild(styleSheet);
 
 /* ===============================================
-   SCROLL ANIMATIONS (Intersection Observer)
+   SCROLL ANIMATIONS (Intersection Observer) - OPTIMIZADO
    =============================================== */
 function initScrollAnimations() {
-    const animatedElements = document.querySelectorAll(
-        '.about-content, .about-images, .specialty-card, .menu-item, .gallery-item, .reservations-info, .reservation-form'
+    // Elementos principales (pocos, pueden tener animación individual)
+    const mainElements = document.querySelectorAll(
+        '.about-content, .about-images, .reservations-info, .reservation-form'
     );
-    
+
+    // Elementos de grid (muchos, animación por grupo)
+    const gridElements = document.querySelectorAll(
+        '.specialty-card, .menu-item, .gallery-item'
+    );
+
     const observerOptions = {
         root: null,
-        rootMargin: '0px',
-        threshold: 0.1
+        rootMargin: '50px', // Pre-carga antes de que sean visibles
+        threshold: 0.05     // Menos threshold para activar más rápido
     };
-    
-    const observer = new IntersectionObserver((entries) => {
+
+    // Observer para elementos principales
+    const mainObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-                observer.unobserve(entry.target);
+                entry.target.classList.add('animate-in');
+                mainObserver.unobserve(entry.target);
             }
         });
     }, observerOptions);
-    
-    animatedElements.forEach((el, index) => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
-        observer.observe(el);
+
+    // Observer para grids - con batch animation
+    const gridObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+                gridObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Aplicar clases iniciales a elementos principales
+    mainElements.forEach((el, index) => {
+        el.classList.add('animate-ready');
+        el.style.transitionDelay = `${Math.min(index * 0.1, 0.3)}s`;
+        mainObserver.observe(el);
+    });
+
+    // Aplicar clases iniciales a elementos de grid con delay limitado
+    gridElements.forEach((el, index) => {
+        el.classList.add('animate-ready');
+        // Delay máximo de 0.3s, reinicia cada 6 elementos (una fila típica)
+        const rowIndex = index % 6;
+        el.style.transitionDelay = `${rowIndex * 0.05}s`;
+        gridObserver.observe(el);
     });
 }
+
+// Agregar estilos de animación optimizados
+const animationStyles = document.createElement('style');
+animationStyles.textContent = `
+    .animate-ready {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+        will-change: opacity, transform;
+    }
+    
+    .animate-in {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+    
+    /* Desactivar animaciones si el usuario prefiere reducir movimiento */
+    @media (prefers-reduced-motion: reduce) {
+        .animate-ready {
+            opacity: 1;
+            transform: none;
+            transition: none;
+        }
+    }
+`;
+document.head.appendChild(animationStyles);
 
 /* ===============================================
    UTILITY FUNCTIONS
    =============================================== */
 function throttle(func, limit) {
     let inThrottle;
-    return function(...args) {
+    return function (...args) {
         if (!inThrottle) {
             func.apply(this, args);
             inThrottle = true;
@@ -335,7 +387,7 @@ function throttle(func, limit) {
 
 function debounce(func, wait) {
     let timeout;
-    return function(...args) {
+    return function (...args) {
         clearTimeout(timeout);
         timeout = setTimeout(() => func.apply(this, args), wait);
     };
@@ -346,12 +398,12 @@ function debounce(func, wait) {
    =============================================== */
 function initGalleryLightbox() {
     const galleryItems = document.querySelectorAll('.gallery-item');
-    
+
     galleryItems.forEach(item => {
         item.addEventListener('click', () => {
             const img = item.querySelector('img');
             if (!img) return;
-            
+
             // Create lightbox
             const lightbox = document.createElement('div');
             lightbox.className = 'lightbox';
@@ -367,7 +419,7 @@ function initGalleryLightbox() {
                     </button>
                 </div>
             `;
-            
+
             // Add lightbox styles
             const styles = `
                 .lightbox {
@@ -406,20 +458,20 @@ function initGalleryLightbox() {
                     padding: 8px;
                 }
             `;
-            
+
             const styleEl = document.createElement('style');
             styleEl.textContent = styles;
             lightbox.appendChild(styleEl);
-            
+
             document.body.appendChild(lightbox);
             document.body.style.overflow = 'hidden';
-            
+
             // Close handlers
             const close = () => {
                 lightbox.remove();
                 document.body.style.overflow = 'visible';
             };
-            
+
             lightbox.querySelector('.lightbox-overlay').addEventListener('click', close);
             lightbox.querySelector('.lightbox-close').addEventListener('click', close);
             document.addEventListener('keydown', (e) => {
@@ -437,7 +489,7 @@ document.addEventListener('DOMContentLoaded', initGalleryLightbox);
    =============================================== */
 function initHeroParallax() {
     const hero = document.querySelector('.hero');
-    
+
     if (hero) {
         window.addEventListener('scroll', () => {
             const scrolled = window.scrollY;
@@ -455,11 +507,11 @@ document.addEventListener('DOMContentLoaded', initHeroParallax);
    =============================================== */
 function initCounterAnimation() {
     const counters = document.querySelectorAll('.stat-number');
-    
+
     const observerOptions = {
         threshold: 0.5
     };
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -470,29 +522,29 @@ function initCounterAnimation() {
             }
         });
     }, observerOptions);
-    
+
     counters.forEach(counter => observer.observe(counter));
 }
 
 function animateCounter(element, start, end, duration) {
     const startTime = performance.now();
     const suffix = element.textContent.replace(/[0-9]/g, '');
-    
+
     function update(currentTime) {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        
+
         // Easing function
         const easeOutQuart = 1 - Math.pow(1 - progress, 4);
         const current = Math.floor(easeOutQuart * (end - start) + start);
-        
+
         element.textContent = current + suffix;
-        
+
         if (progress < 1) {
             requestAnimationFrame(update);
         }
     }
-    
+
     requestAnimationFrame(update);
 }
 
@@ -503,7 +555,7 @@ document.addEventListener('DOMContentLoaded', initCounterAnimation);
    =============================================== */
 function initFormValidation() {
     const inputs = document.querySelectorAll('.form-group input, .form-group select, .form-group textarea');
-    
+
     inputs.forEach(input => {
         input.addEventListener('blur', () => validateField(input));
         input.addEventListener('input', () => {
@@ -517,15 +569,15 @@ function initFormValidation() {
 function validateField(field) {
     const value = field.value.trim();
     const isRequired = field.hasAttribute('required');
-    
+
     // Remove existing error state
     field.classList.remove('error');
-    
+
     if (isRequired && !value) {
         field.classList.add('error');
         return false;
     }
-    
+
     // Email validation
     if (field.type === 'email' && value) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -534,7 +586,7 @@ function validateField(field) {
             return false;
         }
     }
-    
+
     // Phone validation
     if (field.type === 'tel' && value) {
         const phoneRegex = /^[\d\s\-\+\(\)]{10,}$/;
@@ -543,7 +595,7 @@ function validateField(field) {
             return false;
         }
     }
-    
+
     return true;
 }
 
@@ -566,23 +618,23 @@ document.head.appendChild(errorStyles);
    =============================================== */
 document.addEventListener('DOMContentLoaded', () => {
     const newsletterForm = document.querySelector('.newsletter-form');
-    
+
     if (newsletterForm) {
         newsletterForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const input = newsletterForm.querySelector('input');
             const button = newsletterForm.querySelector('button');
             const email = input.value.trim();
-            
+
             if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
                 input.style.borderColor = '#e74c3c';
                 return;
             }
-            
+
             input.style.borderColor = '';
             button.innerHTML = '✓';
-            
+
             setTimeout(() => {
                 input.value = '';
                 button.innerHTML = `
@@ -595,3 +647,39 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+
+function initMapLazyLoad() {
+    const mapContainer = document.getElementById('map-container');
+    const mapFacade = document.getElementById('map-facade');
+    const loadBtn = mapContainer?.querySelector('.map-load-btn');
+
+    if (!loadBtn || !mapFacade || !mapContainer) return;
+
+    loadBtn.addEventListener('click', () => {
+        // Add loading state
+        mapContainer.classList.add('loading');
+
+        // Create the iframe
+        const iframe = document.createElement('iframe');
+        iframe.src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.635366437916!2d-102.35660942397388!3d19.079762982125626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8431e1e3dd2bfe03%3A0x3e4a929fc838d55a!2sRestaurant%20bar%20meranti!5e0!3m2!1ses!2smx!4v1766904843309!5m2!1ses!2smx';
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+        iframe.setAttribute('title', 'Ubicación de Meranti Restaurante');
+
+        // When iframe loads, remove facade and loading state
+        iframe.onload = () => {
+            mapFacade.remove();
+            mapContainer.classList.remove('loading');
+        };
+
+        // Handle error
+        iframe.onerror = () => {
+            mapContainer.classList.remove('loading');
+            loadBtn.textContent = 'Error al cargar el mapa';
+        };
+
+        // Add iframe to container
+        mapContainer.appendChild(iframe);
+    });
+}
