@@ -492,8 +492,15 @@ select {
     justify-content: center;
     background:
         linear-gradient(rgba(13, 13, 13, 0.4), rgba(13, 13, 13, 0.5)),
-        url('images/fondo_hero.jpg') center/cover no-repeat;
+        url('images/fondo_hero.webp') center/cover no-repeat;
     overflow: hidden;
+}
+
+/* Fallback para navegadores sin soporte WebP */
+.no-webp .hero {
+    background:
+        linear-gradient(rgba(13, 13, 13, 0.4), rgba(13, 13, 13, 0.5)),
+        url('images/fondo_hero.jpg') center/cover no-repeat;
 }
 
 .hero-overlay {
@@ -682,6 +689,13 @@ select {
 /* Hero Mobile Optimization */
 @media (max-width: 768px) {
     .hero {
+        background:
+            linear-gradient(rgba(13, 13, 13, 0.3), rgba(13, 13, 13, 0.4)),
+            url('images/fondo_hero.webp') center center/cover no-repeat;
+        background-attachment: scroll;
+    }
+
+    .no-webp .hero {
         background:
             linear-gradient(rgba(13, 13, 13, 0.3), rgba(13, 13, 13, 0.4)),
             url('images/fondo_hero.jpg') center center/cover no-repeat;

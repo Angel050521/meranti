@@ -132,18 +132,26 @@
     <link rel="preload" href="styles.css" as="style">
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Preload imagen LCP -->
-    <link rel="preload" href="images/fav_icon.png" as="image" fetchpriority="high">
+    <!-- Preload imagen LCP (WebP optimizado) -->
+    <link rel="preload" href="images/fav_icon.webp" as="image" type="image/webp" fetchpriority="high">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/fav_icon.png" sizes="32x32">
+
+    <!-- WebP Detection para fallback en CSS -->
+    <script>
+        (function () { var i = new Image; i.onload = i.onerror = function () { document.documentElement.classList.add(i.height == 1 ? 'webp' : 'no-webp') }; i.src = 'data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==' })();
+    </script>
 </head>
 
 <body>
     <!-- Preloader -->
     <div class="preloader" id="preloader">
         <div class="preloader-content">
-            <img src="images/fav_icon.png" alt="Meranti" class="logo-preloader-icon" fetchpriority="high">
+            <picture>
+                <source srcset="images/fav_icon.webp" type="image/webp">
+                <img src="images/fav_icon.png" alt="Meranti" class="logo-preloader-icon" fetchpriority="high">
+            </picture>
             <div class="logo-preloader">MERANTI</div>
             <div class="preloader-bar">
                 <div class="preloader-progress"></div>
@@ -155,7 +163,10 @@
     <header class="header" id="header">
         <nav class="nav container">
             <a href="#hero" class="nav-logo">
-                <img src="images/Logo_horizontal.png" alt="Meranti Restaurante" class="logo-img">
+                <picture>
+                    <source srcset="images/Logo_horizontal.webp" type="image/webp">
+                    <img src="images/Logo_horizontal.png" alt="Meranti Restaurante" class="logo-img">
+                </picture>
             </a>
 
             <div class="nav-menu" id="nav-menu">
@@ -262,13 +273,19 @@
             <div class="about-grid">
                 <div class="about-images">
                     <div class="about-img-wrapper main">
-                        <img src="images/about-img-wrapper main.jpg"
-                            alt="Cortes premium en Meranti Restaurante Apatzingán" class="about-img" loading="lazy">
+                        <picture>
+                            <source srcset="images/about-img-wrapper-main.webp" type="image/webp">
+                            <img src="images/about-img-wrapper main.jpg"
+                                alt="Cortes premium en Meranti Restaurante Apatzingán" class="about-img" loading="lazy">
+                        </picture>
                         <div class="about-img-overlay"></div>
                     </div>
                     <div class="about-img-wrapper secondary">
-                        <img src="images/about-img-wrapper secondary.jpg" alt="Mixología y cócteles de autor en Meranti"
-                            class="about-img" loading="lazy">
+                        <picture>
+                            <source srcset="images/about-img-wrapper-secondary.webp" type="image/webp">
+                            <img src="images/about-img-wrapper secondary.jpg"
+                                alt="Mixología y cócteles de autor en Meranti" class="about-img" loading="lazy">
+                        </picture>
                         <div class="about-img-overlay"></div>
                     </div>
                     <div class="experience-badge">
