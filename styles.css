@@ -798,6 +798,12 @@ select {
     color: var(--color-primary);
 }
 
+.feature-icon img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
 .feature-content h4 {
     font-family: var(--font-display);
     font-size: var(--text-lg);
@@ -883,6 +889,12 @@ select {
 .specialty-icon svg {
     width: 40px;
     height: 40px;
+}
+
+.specialty-icon img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
 }
 
 .specialty-title {
