@@ -133,7 +133,7 @@
     <link rel="stylesheet" href="styles.css">
 
     <!-- Preload imagen LCP (WebP optimizado) -->
-    <link rel="preload" href="images/fav_icon.webp" as="image" type="image/webp" fetchpriority="high">
+    <link rel="preload" href="images/fav_icon-optimized.webp" as="image" type="image/webp" fetchpriority="high">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/fav_icon.png" sizes="32x32">
@@ -149,8 +149,10 @@
     <div class="preloader" id="preloader">
         <div class="preloader-content">
             <picture>
-                <source srcset="images/fav_icon.webp" type="image/webp">
-                <img src="images/fav_icon.png" alt="Meranti" class="logo-preloader-icon" fetchpriority="high">
+                <source srcset="images/fav_icon-optimized.webp 1x, images/fav_icon-2x-optimized.webp 2x"
+                    type="image/webp">
+                <img src="images/fav_icon.png" alt="Meranti" class="logo-preloader-icon" width="230" height="230"
+                    fetchpriority="high">
             </picture>
             <div class="logo-preloader">MERANTI</div>
             <div class="preloader-bar">
@@ -274,17 +276,23 @@
                 <div class="about-images">
                     <div class="about-img-wrapper main">
                         <picture>
-                            <source srcset="images/about-img-wrapper-main.webp" type="image/webp">
+                            <source
+                                srcset="images/about-img-wrapper-main-optimized.webp 1x, images/about-img-wrapper-main-2x-optimized.webp 2x"
+                                type="image/webp">
                             <img src="images/about-img-wrapper main.jpg"
-                                alt="Cortes premium en Meranti Restaurante Apatzingán" class="about-img" loading="lazy">
+                                alt="Cortes premium en Meranti Restaurante Apatzingán" class="about-img" width="388"
+                                height="504" loading="lazy">
                         </picture>
                         <div class="about-img-overlay"></div>
                     </div>
                     <div class="about-img-wrapper secondary">
                         <picture>
-                            <source srcset="images/about-img-wrapper-secondary.webp" type="image/webp">
+                            <source
+                                srcset="images/about-img-wrapper-secondary-optimized.webp 1x, images/about-img-wrapper-secondary-2x-optimized.webp 2x"
+                                type="image/webp">
                             <img src="images/about-img-wrapper secondary.jpg"
-                                alt="Mixología y cócteles de autor en Meranti" class="about-img" loading="lazy">
+                                alt="Mixología y cócteles de autor en Meranti" class="about-img" width="388"
+                                height="517" loading="lazy">
                         </picture>
                         <div class="about-img-overlay"></div>
                     </div>

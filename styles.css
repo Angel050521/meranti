@@ -490,9 +490,10 @@ select {
     display: flex;
     align-items: center;
     justify-content: center;
+    /* Mobile first - carga la imagen más pequeña por defecto */
     background:
         linear-gradient(rgba(13, 13, 13, 0.4), rgba(13, 13, 13, 0.5)),
-        url('images/fondo_hero.webp') center/cover no-repeat;
+        url('images/fondo_hero-mobile-optimized.webp') center/cover no-repeat;
     overflow: hidden;
 }
 
@@ -501,6 +502,36 @@ select {
     background:
         linear-gradient(rgba(13, 13, 13, 0.4), rgba(13, 13, 13, 0.5)),
         url('images/fondo_hero.jpg') center/cover no-repeat;
+}
+
+/* Tablet - imagen mediana */
+@media (min-width: 769px) {
+    .hero {
+        background:
+            linear-gradient(rgba(13, 13, 13, 0.4), rgba(13, 13, 13, 0.5)),
+            url('images/fondo_hero-tablet-optimized.webp') center/cover no-repeat;
+    }
+
+    .no-webp .hero {
+        background:
+            linear-gradient(rgba(13, 13, 13, 0.4), rgba(13, 13, 13, 0.5)),
+            url('images/fondo_hero.jpg') center/cover no-repeat;
+    }
+}
+
+/* Desktop - imagen completa */
+@media (min-width: 1025px) {
+    .hero {
+        background:
+            linear-gradient(rgba(13, 13, 13, 0.4), rgba(13, 13, 13, 0.5)),
+            url('images/fondo_hero-optimized.webp') center/cover no-repeat;
+    }
+
+    .no-webp .hero {
+        background:
+            linear-gradient(rgba(13, 13, 13, 0.4), rgba(13, 13, 13, 0.5)),
+            url('images/fondo_hero.jpg') center/cover no-repeat;
+    }
 }
 
 .hero-overlay {
@@ -688,20 +719,6 @@ select {
 
 /* Hero Mobile Optimization */
 @media (max-width: 768px) {
-    .hero {
-        background:
-            linear-gradient(rgba(13, 13, 13, 0.3), rgba(13, 13, 13, 0.4)),
-            url('images/fondo_hero.webp') center center/cover no-repeat;
-        background-attachment: scroll;
-    }
-
-    .no-webp .hero {
-        background:
-            linear-gradient(rgba(13, 13, 13, 0.3), rgba(13, 13, 13, 0.4)),
-            url('images/fondo_hero.jpg') center center/cover no-repeat;
-        background-attachment: scroll;
-    }
-
     .hero-overlay {
         background: radial-gradient(ellipse at center, transparent 0%, var(--color-bg-dark) 85%);
     }
