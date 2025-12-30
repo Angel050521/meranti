@@ -679,6 +679,20 @@ select {
     }
 }
 
+/* Hero Mobile Optimization */
+@media (max-width: 768px) {
+    .hero {
+        background:
+            linear-gradient(rgba(13, 13, 13, 0.3), rgba(13, 13, 13, 0.4)),
+            url('images/fondo_hero.jpg') center center/cover no-repeat;
+        background-attachment: scroll;
+    }
+
+    .hero-overlay {
+        background: radial-gradient(ellipse at center, transparent 0%, var(--color-bg-dark) 85%);
+    }
+}
+
 /* ===============================================
    ABOUT SECTION
    =============================================== */
