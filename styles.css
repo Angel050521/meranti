@@ -492,7 +492,7 @@ select {
     justify-content: center;
     background:
         linear-gradient(rgba(13, 13, 13, 0.7), rgba(13, 13, 13, 0.8)),
-        url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80') center/cover no-repeat;
+        url('images/fondo_hero.jpg') center/cover no-repeat;
     overflow: hidden;
 }
 
