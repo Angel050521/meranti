@@ -537,24 +537,6 @@ function initGalleryLightbox() {
 document.addEventListener('DOMContentLoaded', initGalleryLightbox);
 
 /* ===============================================
-   HEADER PARALLAX EFFECT
-   =============================================== */
-function initHeroParallax() {
-    const hero = document.querySelector('.hero');
-
-    if (hero) {
-        window.addEventListener('scroll', () => {
-            const scrolled = window.scrollY;
-            if (scrolled < window.innerHeight) {
-                hero.style.backgroundPositionY = `${scrolled * 0.5}px`;
-            }
-        });
-    }
-}
-
-document.addEventListener('DOMContentLoaded', initHeroParallax);
-
-/* ===============================================
    COUNTER ANIMATION
    =============================================== */
 function initCounterAnimation() {
