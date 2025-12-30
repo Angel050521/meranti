@@ -491,7 +491,7 @@ select {
     align-items: center;
     justify-content: center;
     background:
-        linear-gradient(rgba(13, 13, 13, 0.7), rgba(13, 13, 13, 0.8)),
+        linear-gradient(rgba(13, 13, 13, 0.4), rgba(13, 13, 13, 0.5)),
         url('images/fondo_hero.jpg') center/cover no-repeat;
     overflow: hidden;
 }
@@ -538,14 +538,16 @@ select {
     font-weight: 600;
     line-height: 1.1;
     margin-bottom: var(--space-6);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
 }
 
 .hero-description {
     max-width: 600px;
     margin: 0 auto var(--space-8);
     font-size: var(--text-lg);
-    color: var(--color-text-secondary);
+    color: var(--color-text);
     line-height: 1.8;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 .hero-buttons {
