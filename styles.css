@@ -930,7 +930,7 @@ select {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     height: 100%;
     padding: var(--space-8);
     text-align: center;
@@ -966,38 +966,6 @@ select {
     letter-spacing: 0.05em;
     z-index: 3;
     box-shadow: var(--shadow);
-}
-
-.specialty-icon {
-    width: 70px;
-    height: 70px;
-    margin-bottom: var(--space-5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(218, 166, 63, 0.15);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(218, 166, 63, 0.3);
-    border-radius: var(--radius-full);
-    color: var(--color-primary);
-    transition: all var(--transition);
-}
-
-.specialty-card:hover .specialty-icon {
-    background: rgba(218, 166, 63, 0.25);
-    transform: scale(1.1);
-    box-shadow: 0 0 30px rgba(218, 166, 63, 0.3);
-}
-
-.specialty-icon svg {
-    width: 35px;
-    height: 35px;
-}
-
-.specialty-icon img {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
 }
 
 .specialty-title {
@@ -1424,6 +1392,281 @@ select {
     margin-bottom: var(--space-6);
     border-radius: 0 var(--radius) var(--radius) 0;
     line-height: 1.6;
+}
+
+/* Menu Hint - Indicador de interactividad */
+.menu-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    background: rgba(218, 166, 63, 0.1);
+    border: 1px solid rgba(218, 166, 63, 0.2);
+    border-radius: var(--radius-full);
+    padding: var(--space-2) var(--space-4);
+    margin-top: var(--space-4);
+}
+
+.menu-hint svg {
+    color: var(--color-primary);
+    flex-shrink: 0;
+}
+
+
+/* Menu Item - Interactivo con indicador de imagen */
+.menu-item {
+    position: relative;
+    background: var(--color-bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: all var(--transition);
+    cursor: pointer;
+}
+
+.menu-item[data-image]::before {
+    content: '';
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    width: 28px;
+    height: 28px;
+    background: rgba(218, 166, 63, 0.15);
+    border: 1px solid rgba(218, 166, 63, 0.3);
+    border-radius: var(--radius-full);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition);
+}
+
+.menu-item[data-image]::after {
+    content: '';
+    position: absolute;
+    top: calc(var(--space-3) + 7px);
+    right: calc(var(--space-3) + 7px);
+    width: 14px;
+    height: 14px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23DAA63F' stroke-width='2'%3E%3Cpath d='M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z'%3E%3C/path%3E%3Ccircle cx='12' cy='12' r='3'%3E%3C/circle%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 3;
+    transition: all var(--transition);
+}
+
+.menu-item[data-image]:hover::before {
+    background: var(--color-primary);
+    transform: scale(1.1);
+}
+
+.menu-item[data-image]:hover::after {
+    filter: brightness(0) invert(0.1);
+}
+
+/* ===============================================
+   DISH LIGHTBOX - Vista de Platillos
+   =============================================== */
+.dish-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.dish-lightbox.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.dish-lightbox-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.dish-lightbox-content {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    background: var(--color-bg-card);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6), 0 0 60px rgba(218, 166, 63, 0.1);
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.dish-lightbox.active .dish-lightbox-content {
+    transform: scale(1) translateY(0);
+}
+
+.dish-lightbox-image {
+    position: relative;
+    width: 100%;
+    padding-top: 75%;
+    /* Aspect ratio 4:3 */
+    background: var(--color-bg-elevated);
+    overflow: hidden;
+}
+
+.dish-lightbox-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dish-lightbox-image::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(transparent, rgba(30, 30, 30, 0.8));
+    pointer-events: none;
+}
+
+.dish-lightbox-close {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition);
+    z-index: 10;
+}
+
+.dish-lightbox-close:hover {
+    background: var(--color-primary);
+    color: var(--color-bg-dark);
+    transform: rotate(90deg);
+}
+
+.dish-lightbox-info {
+    padding: var(--space-6);
+}
+
+.dish-lightbox-badge {
+    display: inline-block;
+    background: var(--gradient-gold);
+    color: var(--color-bg-dark);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.dish-lightbox-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-4);
+    margin-bottom: var(--space-3);
+}
+
+.dish-lightbox-title {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.dish-lightbox-price {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--color-primary);
+    white-space: nowrap;
+}
+
+.dish-lightbox-description {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+}
+
+/* Placeholder para platillos sin imagen */
+.dish-lightbox-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    background: linear-gradient(135deg, var(--color-bg-elevated) 0%, var(--color-bg-card) 100%);
+    color: var(--color-text-muted);
+}
+
+.dish-lightbox-placeholder svg {
+    width: 60px;
+    height: 60px;
+    opacity: 0.3;
+}
+
+.dish-lightbox-placeholder span {
+    font-size: var(--text-sm);
+    opacity: 0.5;
+}
+
+/* Responsive Lightbox */
+@media (max-width: 768px) {
+    .dish-lightbox {
+        padding: 0;
+        align-items: flex-end;
+    }
+
+    .dish-lightbox-content {
+        max-width: 100%;
+        border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .dish-lightbox-image {
+        padding-top: 66%;
+        /* Slightly smaller on mobile */
+    }
+}
+
+/* Swipe hint for mobile */
+@media (max-width: 768px) {
+    .dish-lightbox-content::before {
+        content: '';
+        position: absolute;
+        top: var(--space-2);
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: var(--radius-full);
+        z-index: 20;
+    }
 }
 
 /* ===============================================

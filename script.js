@@ -163,6 +163,154 @@ function initMenuTabs() {
             });
         });
     });
+
+    // Initialize dish lightbox
+    initDishLightbox();
+}
+
+function initDishLightbox() {
+    const menuItems = document.querySelectorAll('.menu-item');
+
+    // Create lightbox element
+    const lightbox = document.createElement('div');
+    lightbox.className = 'dish-lightbox';
+    lightbox.id = 'dish-lightbox';
+    lightbox.innerHTML = `
+        <div class="dish-lightbox-overlay"></div>
+        <div class="dish-lightbox-content">
+            <button class="dish-lightbox-close" aria-label="Cerrar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="dish-lightbox-image">
+                <img src="" alt="" id="dish-lightbox-img">
+                <div class="dish-lightbox-placeholder" id="dish-lightbox-placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                    <span>Imagen próximamente</span>
+                </div>
+            </div>
+            <div class="dish-lightbox-info">
+                <div class="dish-lightbox-badge" id="dish-lightbox-badge" style="display: none;"></div>
+                <div class="dish-lightbox-header">
+                    <h3 class="dish-lightbox-title" id="dish-lightbox-title"></h3>
+                    <span class="dish-lightbox-price" id="dish-lightbox-price"></span>
+                </div>
+                <p class="dish-lightbox-description" id="dish-lightbox-description"></p>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(lightbox);
+
+    // Get lightbox elements
+    const lightboxImg = document.getElementById('dish-lightbox-img');
+    const lightboxPlaceholder = document.getElementById('dish-lightbox-placeholder');
+    const lightboxTitle = document.getElementById('dish-lightbox-title');
+    const lightboxPrice = document.getElementById('dish-lightbox-price');
+    const lightboxDescription = document.getElementById('dish-lightbox-description');
+    const lightboxBadge = document.getElementById('dish-lightbox-badge');
+    const lightboxClose = lightbox.querySelector('.dish-lightbox-close');
+    const lightboxOverlay = lightbox.querySelector('.dish-lightbox-overlay');
+    const lightboxContent = lightbox.querySelector('.dish-lightbox-content');
+
+    // Open lightbox function
+    function openLightbox(item) {
+        const title = item.querySelector('.menu-item-title')?.textContent || '';
+        const price = item.querySelector('.menu-item-price')?.textContent || '';
+        const description = item.querySelector('.menu-item-description')?.textContent || '';
+        const badge = item.querySelector('.menu-item-badge')?.textContent || '';
+        const imageSrc = item.dataset.image || '';
+
+        // Set content
+        lightboxTitle.textContent = title;
+        lightboxPrice.textContent = price;
+        lightboxDescription.textContent = description;
+
+        // Handle badge
+        if (badge) {
+            lightboxBadge.textContent = badge;
+            lightboxBadge.style.display = 'inline-block';
+        } else {
+            lightboxBadge.style.display = 'none';
+        }
+
+        // Handle image
+        if (imageSrc) {
+            lightboxImg.src = imageSrc;
+            lightboxImg.alt = title;
+            lightboxImg.style.display = 'block';
+            lightboxPlaceholder.style.display = 'none';
+        } else {
+            lightboxImg.style.display = 'none';
+            lightboxPlaceholder.style.display = 'flex';
+        }
+
+        // Show lightbox
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Close lightbox function
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = 'visible';
+    }
+
+    // Add click handlers to menu items
+    menuItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            // Prevent if clicking a link inside the item
+            if (e.target.closest('a')) return;
+            openLightbox(item);
+        });
+
+        // Add keyboard accessibility
+        item.setAttribute('tabindex', '0');
+        item.setAttribute('role', 'button');
+        item.setAttribute('aria-label', 'Ver imagen del platillo');
+
+        item.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openLightbox(item);
+            }
+        });
+    });
+
+    // Close handlers
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxOverlay.addEventListener('click', closeLightbox);
+
+    // Close on ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            closeLightbox();
+        }
+    });
+
+    // Touch swipe to close on mobile
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    lightboxContent.addEventListener('touchstart', (e) => {
+        touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    lightboxContent.addEventListener('touchend', (e) => {
+        touchEndY = e.changedTouches[0].screenY;
+        const swipeDistance = touchEndY - touchStartY;
+
+        // If swiped down more than 100px, close
+        if (swipeDistance > 100) {
+            closeLightbox();
+        }
+    }, { passive: true });
 }
 
 /* ===============================================
