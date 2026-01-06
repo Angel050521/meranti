@@ -13,9 +13,6 @@
   Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
 
 # Caché para fuentes (1 año)
-/fonts/*
-  Cache-Control: public, max-age=31536000, immutable
-
 /*.woff2
   Cache-Control: public, max-age=31536000, immutable
 
