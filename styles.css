@@ -280,7 +280,7 @@ select {
 }
 
 .logo-preloader-icon {
-    height: 230px;
+    height: 115px;
     width: auto;
     margin-bottom: var(--space-4);
     display: block;

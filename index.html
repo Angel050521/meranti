@@ -132,8 +132,8 @@
     <link rel="preload" href="styles.css" as="style">
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Preload imagen LCP (WebP optimizado) -->
-    <link rel="preload" href="images/fav_icon-optimized.webp" as="image" type="image/webp" fetchpriority="high">
+    <!-- Preload imagen LCP (WebP optimizado - versión 1x para carga inicial rápida) -->
+    <link rel="preload" href="images/fav_icon-1x-optimized.webp" as="image" type="image/webp" fetchpriority="high">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/fav_icon.png" sizes="32x32">
@@ -149,9 +149,10 @@
     <div class="preloader" id="preloader">
         <div class="preloader-content">
             <picture>
-                <source srcset="images/fav_icon-optimized.webp 1x, images/fav_icon-2x-optimized.webp 2x"
+                <source
+                    srcset="images/fav_icon-1x-optimized.webp 1x, images/fav_icon-optimized.webp 1.5x, images/fav_icon-2x-optimized.webp 2x"
                     type="image/webp">
-                <img src="images/fav_icon.png" alt="Meranti" class="logo-preloader-icon" width="230" height="230"
+                <img src="images/fav_icon.png" alt="Meranti" class="logo-preloader-icon" width="115" height="115"
                     fetchpriority="high">
             </picture>
             <div class="logo-preloader">MERANTI</div>
@@ -347,7 +348,7 @@
             </div>
 
             <div class="specialties-grid">
-                <div class="specialty-card" style="--bg-image: url('images/specialty-grill.png')">
+                <div class="specialty-card" style="--bg-image: url('images/specialty-grill.webp')">
                     <div class="specialty-card-bg"></div>
                     <div class="specialty-card-overlay"></div>
                     <div class="specialty-card-content">
@@ -368,7 +369,7 @@
                     </div>
                 </div>
 
-                <div class="specialty-card featured" style="--bg-image: url('images/specialty-mixology.png')">
+                <div class="specialty-card featured" style="--bg-image: url('images/specialty-mixology.webp')">
                     <div class="specialty-card-bg"></div>
                     <div class="specialty-card-overlay"></div>
                     <div class="specialty-badge">Favorito</div>
@@ -390,7 +391,7 @@
                     </div>
                 </div>
 
-                <div class="specialty-card" style="--bg-image: url('images/specialty-cuisine.png')">
+                <div class="specialty-card" style="--bg-image: url('images/specialty-cuisine.webp')">
                     <div class="specialty-card-bg"></div>
                     <div class="specialty-card-overlay"></div>
                     <div class="specialty-card-content">

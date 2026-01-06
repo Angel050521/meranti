@@ -78,21 +78,38 @@ function initNavigation() {
         });
     });
 
-    // Update active link on scroll
+    // Update active link on scroll - OPTIMIZADO para evitar reflow
     const sections = document.querySelectorAll('section[id]');
+
+    // Cache de dimensiones para evitar reflow forzado
+    let sectionData = [];
+    let lastWidth = 0;
+
+    function cacheSectionDimensions() {
+        const currentWidth = window.innerWidth;
+        // Solo recalcular si cambió el viewport (resize)
+        if (currentWidth !== lastWidth || sectionData.length === 0) {
+            lastWidth = currentWidth;
+            sectionData = Array.from(sections).map(section => ({
+                id: section.getAttribute('id'),
+                top: section.offsetTop - 150,
+                height: section.offsetHeight
+            }));
+        }
+    }
+
+    // Cachear dimensiones inicialmente y en resize
+    cacheSectionDimensions();
+    window.addEventListener('resize', debounce(cacheSectionDimensions, 250));
 
     function updateActiveLink() {
         const scrollY = window.scrollY;
 
-        sections.forEach(section => {
-            const sectionHeight = section.offsetHeight;
-            const sectionTop = section.offsetTop - 150;
-            const sectionId = section.getAttribute('id');
-
-            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+        sectionData.forEach(({ id, top, height }) => {
+            if (scrollY > top && scrollY <= top + height) {
                 navLinks.forEach(link => {
                     link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
+                    if (link.getAttribute('href') === `#${id}`) {
                         link.classList.add('active');
                     }
                 });
