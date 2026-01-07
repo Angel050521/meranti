@@ -1643,13 +1643,51 @@ select {
     .dish-lightbox-content {
         max-width: 100%;
         border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-        max-height: 90vh;
+        max-height: 85vh;
         overflow-y: auto;
+        display: flex;
+        flex-direction: column;
     }
 
     .dish-lightbox-image {
-        padding-top: 66%;
-        /* Slightly smaller on mobile */
+        padding-top: 0;
+        height: 50vh;
+        min-height: 250px;
+        max-height: 400px;
+        flex-shrink: 0;
+    }
+
+    .dish-lightbox-placeholder {
+        position: relative;
+        height: 100%;
+        min-height: 250px;
+    }
+
+    .dish-lightbox-placeholder svg {
+        width: 80px;
+        height: 80px;
+    }
+
+    .dish-lightbox-info {
+        padding: var(--space-5);
+    }
+
+    .dish-lightbox-header {
+        flex-wrap: wrap;
+    }
+
+    .dish-lightbox-title {
+        font-size: var(--text-xl);
+        flex: 1;
+        min-width: 60%;
+    }
+
+    .dish-lightbox-price {
+        font-size: var(--text-xl);
+    }
+
+    .dish-lightbox-description {
+        font-size: var(--text-sm);
     }
 }
 
