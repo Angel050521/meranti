@@ -345,20 +345,60 @@ function initReservationForm() {
             dateInput.setAttribute('min', today);
         }
 
+        // Modal functionality for tables map
+        const btnViewTables = document.getElementById('btn-view-tables');
+        const tablesModal = document.getElementById('tables-modal');
+        const modalClose = document.getElementById('modal-close');
+
+        if (btnViewTables && tablesModal) {
+            btnViewTables.addEventListener('click', () => {
+                tablesModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+
+            const closeModal = () => {
+                tablesModal.classList.remove('active');
+                document.body.style.overflow = '';
+            };
+
+            if (modalClose) {
+                modalClose.addEventListener('click', closeModal);
+            }
+
+            tablesModal.addEventListener('click', (e) => {
+                if (e.target === tablesModal) {
+                    closeModal();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && tablesModal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+        }
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
             const submitBtn = form.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
 
-            // Get form data
+            // Get form data (with new time and table fields)
+            const timeHour = document.getElementById('time-hour').value;
+            const timeMinutes = document.getElementById('time-minutes').value;
+            const mesaSelect = document.getElementById('mesa');
+
             const formData = {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
                 phone: document.getElementById('phone').value,
                 guests: document.getElementById('guests').value,
                 date: document.getElementById('date').value,
-                time: document.getElementById('time').value,
+                timeHour: timeHour,
+                timeMinutes: timeMinutes,
+                mesa: mesaSelect ? mesaSelect.value : '',
+                mesaText: mesaSelect && mesaSelect.value ? mesaSelect.options[mesaSelect.selectedIndex].text : '',
                 message: document.getElementById('message').value
             };
 
@@ -371,8 +411,9 @@ function initReservationForm() {
                 day: 'numeric'
             });
 
-            // Format time for display
-            const timeFormatted = new Date('1970-01-01T' + formData.time).toLocaleTimeString('es-MX', {
+            // Format time for display (combining hour and minutes)
+            const timeString = `${formData.timeHour}:${formData.timeMinutes}`;
+            const timeFormatted = new Date('1970-01-01T' + timeString + ':00').toLocaleTimeString('es-MX', {
                 hour: 'numeric',
                 minute: '2-digit',
                 hour12: true
@@ -388,6 +429,11 @@ function initReservationForm() {
             whatsappMessage += `- *Personas:* ${formData.guests}\n`;
             whatsappMessage += `- *Fecha:* ${dateFormatted}\n`;
             whatsappMessage += `- *Hora:* ${timeFormatted}\n`;
+
+            // Add table preference if selected
+            if (formData.mesa && formData.mesaText) {
+                whatsappMessage += `- *Mesa preferida:* ${formData.mesaText}\n`;
+            }
 
             if (formData.message.trim()) {
                 whatsappMessage += `\n*Peticiones especiales:*\n${formData.message}\n`;
@@ -441,6 +487,7 @@ function initReservationForm() {
         });
     }
 }
+
 
 /* ===============================================
    PARTICLES EFFECT
